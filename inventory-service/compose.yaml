@@ -1,0 +1,10 @@
+services:
+  postgres:
+    image: 'postgres:12-bullseye'
+    container_name: pg_inventory
+    environment:
+      - 'POSTGRES_DB=inventory'
+      - 'POSTGRES_USER=username'
+      - 'POSTGRES_PASSWORD=password'
+    ports:
+      - '5432:5432'
