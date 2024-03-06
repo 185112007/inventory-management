@@ -239,6 +239,38 @@ class ProductServiceTest extends BaseTestCase {
     }
 
     @Test
+    public void testFetchByNullIdFail(){
+        // given
+        Long productId = null;
+        String errorMsg = "Given id is null";
+        HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
+        when(productRepository.findById(productId)).thenThrow(IllegalArgumentException.class);
+
+        // when
+        AppBaseException exception = assertThrows(AppBaseException.class, ()-> productService.fetchById(productId));
+
+        // then
+        assertThat(exception.getMessage()).isEqualTo(errorMsg);
+        assertThat(exception.getStatus()).isEqualTo(httpStatus);
+    }
+
+    @Test
+    public void testFetchByIdNotFoundFail(){
+        // given
+        long productId = 1L;
+        String errorMsg = "Product with id:" + productId + " not found";
+        HttpStatus httpStatus = HttpStatus.NOT_FOUND;
+        when(productRepository.findById(productId)).thenReturn(Optional.empty());
+
+        // when
+        AppBaseException exception = assertThrows(AppBaseException.class, () -> productService.fetchById(productId));
+
+        // then
+        assertThat(exception.getMessage()).isEqualTo(errorMsg);
+        assertThat(exception.getStatus()).isEqualTo(httpStatus);
+    }
+
+    @Test
     public void testUpdateProductSuccess() {
         // given
         long productId = 1L;
@@ -291,6 +323,36 @@ class ProductServiceTest extends BaseTestCase {
         assertThat(pro.getName()).isEqualTo(productRequest.getName());
         assertThat(pro.getDescription()).isEqualTo(productRequest.getDescription());
         assertThat(pro.getPrice()).isEqualTo(productRequest.getPrice());
+    }
+
+    @Test
+    public void testDeleteByIdSuccess(){
+        // given
+        long productId = 1L;
+        doNothing().when(productRepository).deleteById(productId);
+
+        // when
+        productService.deleteById(productId);
+
+        // then
+        verify(productRepository,times(1)).deleteById(productId);
+    }
+
+    @Test
+    public void testDeleteByNullIdFail(){
+        // given
+        Long productId = null;
+        doThrow(IllegalArgumentException.class)
+                .when(productRepository).deleteById(productId);
+        String errorMsg = "Given id is null";
+        HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
+
+        // when
+        AppBaseException exception = assertThrows(BadRequestException.class, ()-> productService.deleteById(productId));
+
+        // then
+        assertThat(exception.getMessage()).isEqualTo(errorMsg);
+        assertThat(exception.getStatus()).isEqualTo(httpStatus);
     }
 
     @Test
