@@ -33,7 +33,7 @@ class ProductServiceTest extends BaseTestCase {
     private ProductService productService;
 
     @Test
-    public void testCreateNewProductSuccess() {
+    public void shouldCreateProductSuccess() {
         // given
         long id = 1L;
         String categoryName = "cat-1";
@@ -88,7 +88,7 @@ class ProductServiceTest extends BaseTestCase {
     }
 
     @Test
-    public void testCreateNewProductNullCategoryIdFail() {
+    public void shouldCreateProductWithNullCategoryIdFail() {
         // given
         Long categoryId = null;
         String proName = "pro-1";
@@ -118,7 +118,7 @@ class ProductServiceTest extends BaseTestCase {
     }
 
     @Test
-    public void testCreateNewProductNullFail() {
+    public void shouldCreateNullProductFail() {
         // given
         long id = 1L;
         String categoryName = "cat-1";
@@ -153,7 +153,7 @@ class ProductServiceTest extends BaseTestCase {
     }
 
     @Test
-    public void testFetchAllProductsSuccess() {
+    public void shouldFetchAllProductsSuccess() {
         // given
         ProductCategory category = ProductCategory.builder()
                 .id(1L)
@@ -202,7 +202,7 @@ class ProductServiceTest extends BaseTestCase {
     }
 
     @Test
-    public void testFindProductByIdSuccess() {
+    public void shouldFindProductByIdSuccess() {
         // given
         long id = 1L;
         String categoryName = "cat-1";
@@ -239,7 +239,7 @@ class ProductServiceTest extends BaseTestCase {
     }
 
     @Test
-    public void testFetchByNullIdFail(){
+    public void shouldFetchByNullIdFail(){
         // given
         Long productId = null;
         String errorMsg = "Given id is null";
@@ -255,7 +255,7 @@ class ProductServiceTest extends BaseTestCase {
     }
 
     @Test
-    public void testFetchByIdNotFoundFail(){
+    public void shouldFetchByIdNotFoundFail(){
         // given
         long productId = 1L;
         String errorMsg = "Product with id:" + productId + " not found";
@@ -271,7 +271,7 @@ class ProductServiceTest extends BaseTestCase {
     }
 
     @Test
-    public void testUpdateProductSuccess() {
+    public void shouldUpdateProductSuccess() {
         // given
         long productId = 1L;
         long categoryId = 1L;
@@ -326,7 +326,7 @@ class ProductServiceTest extends BaseTestCase {
     }
 
     @Test
-    public void testDeleteByIdSuccess(){
+    public void shouldDeleteByIdSuccess(){
         // given
         long productId = 1L;
         doNothing().when(productRepository).deleteById(productId);
@@ -339,7 +339,7 @@ class ProductServiceTest extends BaseTestCase {
     }
 
     @Test
-    public void testDeleteByNullIdFail(){
+    public void shouldDeleteByNullIdFail(){
         // given
         Long productId = null;
         doThrow(IllegalArgumentException.class)
@@ -356,7 +356,7 @@ class ProductServiceTest extends BaseTestCase {
     }
 
     @Test
-    public void testCalculateTotalValueSuccess(){
+    public void shouldCalculateTotalValueSuccess(){
         // given
         BigDecimal total = BigDecimal.valueOf(3.45);
         when(productRepository.totalProductPrice()).thenReturn(total);

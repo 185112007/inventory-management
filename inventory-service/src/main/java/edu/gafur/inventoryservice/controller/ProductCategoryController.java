@@ -16,7 +16,7 @@ public class ProductCategoryController {
     private final ProductCategoryService productCategoryService;
 
     @PostMapping
-    public ResponseEntity<ProductCategory> createProduct(@RequestBody ProductCategory category){
+    public ResponseEntity<ProductCategory> createProductCategory(@RequestBody ProductCategory category){
         return new ResponseEntity<>(productCategoryService.create(category), HttpStatus.CREATED);
     }
 

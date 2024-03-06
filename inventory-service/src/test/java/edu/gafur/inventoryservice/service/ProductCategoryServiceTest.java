@@ -26,7 +26,7 @@ class ProductCategoryServiceTest extends BaseTestCase{
     private ProductCategoryService productCategoryService;
 
     @Test
-    public void testCreateNewProductCategorySuccess(){
+    public void shouldCreateProductCategorySuccess(){
         // given
         ProductCategory productCategory = ProductCategory.builder()
                 .name("cat-1")
@@ -46,7 +46,7 @@ class ProductCategoryServiceTest extends BaseTestCase{
     }
 
     @Test
-    public void testCreateNullProductCategoryFail(){
+    public void shouldCreateNullProductCategoryFail(){
         // given
         when(productCategoryRepository.save(any())).thenThrow(new IllegalArgumentException());
 
@@ -58,7 +58,7 @@ class ProductCategoryServiceTest extends BaseTestCase{
     }
 
     @Test
-    public void testCreateNewProductCategoryNameIsNullFail(){
+    public void shouldCreateNullNameProductCategoryFail(){
         // given
         ProductCategory productCategory = ProductCategory.builder()
                 .name(null)
@@ -73,7 +73,7 @@ class ProductCategoryServiceTest extends BaseTestCase{
     }
 
     @Test
-    public void testCreateNewDuplicatedNameProductCategoryFail(){
+    public void shouldCreateDuplicatedNameProductCategoryFail(){
         // given
         ProductCategory productCategory = ProductCategory.builder()
                 .name("cat-1")
@@ -99,7 +99,7 @@ class ProductCategoryServiceTest extends BaseTestCase{
     }
 
     @Test
-    public void testFindByIdSuccess(){
+    public void shouldFindProductCategoryByIdSuccess(){
         // given
         ProductCategory productCategory = ProductCategory.builder()
                 .id(1L)
@@ -118,7 +118,7 @@ class ProductCategoryServiceTest extends BaseTestCase{
     }
 
     @Test
-    public void testFindProductCategoryNullIdFail(){
+    public void shouldFindProductCategoryByNullIdFail(){
         // given
         String msg = "Given id is null";
         when(productCategoryRepository.findById(any())).thenThrow(new IllegalArgumentException());
@@ -132,7 +132,7 @@ class ProductCategoryServiceTest extends BaseTestCase{
     }
 
     @Test
-    public void testFindProductCategoryNotFoundFail(){
+    public void shouldFindProductCategoryByNotFoundIdFail(){
         // given
         String msg = "Category not found";
         when(productCategoryRepository.findById(any())).thenReturn(Optional.empty());
@@ -146,7 +146,7 @@ class ProductCategoryServiceTest extends BaseTestCase{
     }
 
     @Test
-    public void testFetchAllCategoriesSuccess(){
+    public void shouldFetchAllCategoriesSuccess(){
         // given
         List<ProductCategory> categories = List.of(
                 ProductCategory.builder()
