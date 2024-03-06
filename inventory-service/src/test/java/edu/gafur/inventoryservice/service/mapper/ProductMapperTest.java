@@ -15,7 +15,7 @@ class ProductMapperTest extends BaseTestCase {
     private final ProductMapper productMapper = new ProductMapper();
 
     @Test
-    public void testEntityToDtoSuccess(){
+    public void shouldMapEntityToDtoSuccess(){
         // given
         long productId = 1L;
         String proName = "pro-1";
@@ -53,7 +53,7 @@ class ProductMapperTest extends BaseTestCase {
     }
 
     @Test
-    public void testEntitiesToDtoSuccess(){
+    public void shouldMapEntitiesToDtoSuccess(){
         // given
         List<Product> products = List.of(
                 Product.builder()
@@ -102,7 +102,7 @@ class ProductMapperTest extends BaseTestCase {
     }
 
     @Test
-    public void testDtoToEntitySuccess(){
+    public void shouldMapDtoToEntitySuccess(){
         // given
         long productId = 1L;
         String proName = "pro-1";
