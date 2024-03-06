@@ -16,3 +16,7 @@ spring:
     user:
       name: username
       password: password
+  docker:
+    compose:
+      skip:
+        in-tests: false
