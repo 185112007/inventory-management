@@ -1,0 +1,23 @@
+### POST new category
+POST http://localhost:8081/api/categories
+Authorization: Basic username password
+Content-Type: application/json
+
+{
+  "name": "cat-1"
+}
+
+### GET all categories
+GET http://localhost:8081/api/categories
+Accept: application/json
+Authorization: Basic username password
+
+### GET category by id
+GET http://localhost:8081/api/categories/1
+Accept: application/json
+Authorization: Basic username password
+
+### GET category by null id
+GET http://localhost:8081/api/categories/null
+Accept: application/json
+Authorization: Basic username password
