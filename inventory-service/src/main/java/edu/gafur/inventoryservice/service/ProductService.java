@@ -5,6 +5,7 @@ import edu.gafur.inventoryservice.domain.ProductCategory;
 import edu.gafur.inventoryservice.dto.ProductDto;
 import edu.gafur.inventoryservice.exception.BadRequestException;
 import edu.gafur.inventoryservice.exception.NotFoundException;
+import edu.gafur.inventoryservice.exception.base.AppBaseException;
 import edu.gafur.inventoryservice.repository.ProductRepository;
 import edu.gafur.inventoryservice.service.mapper.ProductMapper;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,8 @@ public class ProductService {
             Product productEntity = productMapper.toEntity(product, category);
             productEntity = productRepository.save(productEntity);
             return productMapper.toDto(productEntity);
+        } catch (AppBaseException ex) {
+            throw ex;
         } catch (Exception ex) {
             log.error(ex.getMessage(), ex);
             throw new BadRequestException(ex.getMessage(), HttpStatus.BAD_REQUEST);
@@ -62,6 +65,10 @@ public class ProductService {
         }
     }
 
+    public BigDecimal calculateTotalValue() {
+        return productRepository.totalProductPrice();
+    }
+
     private Product productById(Long id){
         try {
             Optional<Product> savedProduct = productRepository.findById(id);
@@ -72,9 +79,5 @@ public class ProductService {
             throw new BadRequestException("Given id is null", HttpStatus.BAD_REQUEST);
         }
 
-    }
-
-    public BigDecimal calculateTotalValue() {
-        return productRepository.totalProductPrice();
     }
 }
