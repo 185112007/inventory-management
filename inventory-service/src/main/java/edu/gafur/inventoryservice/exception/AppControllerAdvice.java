@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 @Slf4j
-public class ControllerAdvisor {
+public class AppControllerAdvice {
     @ExceptionHandler(AppBaseException.class)
     public ResponseEntity<String> handleException(AppBaseException ex){
       log.error(ex.getMessage(), ex);

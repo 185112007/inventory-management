@@ -74,10 +74,9 @@ public class ProductService {
             Optional<Product> savedProduct = productRepository.findById(id);
             return savedProduct.orElseThrow(
                     () -> new NotFoundException("Product with id:" + id + " not found", HttpStatus.NOT_FOUND));
-        }catch (IllegalArgumentException ex){
+        } catch (IllegalArgumentException ex){
             log.error(ex.getMessage(), ex);
             throw new BadRequestException("Given id is null", HttpStatus.BAD_REQUEST);
         }
-
     }
 }
